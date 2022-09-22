@@ -1,0 +1,49 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+int main() 
+{
+    cout << "Welcome to The adventure game v.2...everything will work just fine ;)\n\n";
+
+    int health = 10, turns = 0, attack, block;
+    srand(static_cast<unsigned int>(time(0)));
+
+    cout << "Goblins find you on the side of the road with nothing but a shield.\n";
+    cout << "They unsheath their swords and swing at you!\n\n";
+
+    do {
+        ++turns;
+        attack = rand() % 4 + 1;
+        block = rand() % 4 + 1;
+        char playerInput = 'b';
+
+        cout << "\nTurn: " << turns << endl;
+        cout << "Health: " << health << endl;
+        cout << "Their attack roll is: " << attack << "!\n";
+        
+        cout << "Press [b] to block!";
+        cin >> playerInput;
+        
+        cout << "Your block roll is: " << block << "!\n";
+
+        if(block >= attack)
+            cout << "\nSuccessful block!\n\n";
+        else if(block < attack)
+            health -= attack;
+        
+        if(health == 5)
+            cout << "\n\nYikes! See a doctor maybe?\n\n";
+    
+    } while(health > 0 && turns < 4);
+
+    if(health > 0)
+        cout << "\nCongratulations player! You have won the game!";
+    else if(health == 0)
+        cout << "You are dead.";
+
+    return 0;
+    
+}
